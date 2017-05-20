@@ -1,0 +1,19 @@
+.modal-content h3{
+	text-align: center;
+	font-size: 2em;
+	font-weight: 600;
+	margin: 0 0 6% 0;
+	color: #fdbb30;
+	font-family: 'Poiret One', cursive;
+}
+.modal-content p{
+	text-align: center;
+	font-size: 1.2em;
+	font-weight: 600;
+	margin: 0 0 6% 0;
+	color: #384F6C;
+	font-family: 'Poiret One', cursive;
+}
+.modal-content{
+	width:400px;
+}

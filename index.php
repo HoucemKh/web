@@ -21,6 +21,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <link href="css/bootstrap.css" rel='stylesheet' type='text/css' media="all">
 <link href="css/wickedpicker.css" rel="stylesheet" type="text/css" media="all">        
 <link href="css/style.css" rel="stylesheet" type="text/css" media="all">
+<link href="css/modal.css" rel="stylesheet" type="text/css" media="all">
 <!-- /css files -->
 <!-- js files -->
 <script src="js/jquery.min.js"></script>
@@ -40,7 +41,7 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 <div class="header">
 	<h1>Book your AndroidLand Package</h1>
 </div>
-<form action="insert.php" method="Post">
+<form  method="Post" id="form-booking">
         <div class="banner-top">
 				<h2>Book Your Room Today</h2>
 				<div class="banner-bottom">
@@ -124,31 +125,70 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 						</div>
 						<div class="bnr-right">
 							<select class="selection" name="package">
-								<option  class="rm" value="0">1</option>
-								<option  class="rm" value="1">2</option>
-								<option  class="rm" value="2">3</option>
+								<option  class="rm" value="1">1</option>
+								<option  class="rm" value="2">2</option>
+								<option  class="rm" value="3">3</option>
 								</select>
 								</div>
 					<div class="bnr-btn">
-						<form>
-							<input type="submit" value="Book Now">
-						</form>
+						
+							<input id='submit' type="submit" value="Book Now" />
+						
 					</div>
 				</div>
 				</form>
-				<!---start-date-piker---->
-		<link rel="stylesheet" href="css/jquery-ui.css" />
-		<script src="js/jquery-ui.js"></script>
-			<script>
-				$(function() {
-				$( "#datepicker,#datepicker1" ).datepicker();
-				});
-			</script>
+
 	<!---/End-date-piker---->
 </div>
 <div class="footer">
 	<p>© 2017 AndroidLand</p>
 </div>
+<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" id="Modalsuccess">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <h3>Booking done with success</h3>
+	  <p class="universeName"></p>
+    </div>
+  </div>
+</div><div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" id="Modalfailure">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <h3>booking with failure</h3>
+	  <p class="failure">have you lost your Universe?</p>
+    </div>
+  </div>
+</div>
+				<!---start-date-piker---->
+		<link rel="stylesheet" href="css/jquery-ui.css" />
+		<script src="js/jquery-ui.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+			<script>
+				$(function() {
+				$( "#datepicker,#datepicker1" ).datepicker();
+				});
+				$("#form-booking").submit(function(e){
+					e.preventDefault;
+					url="insert.php";
+					var value = $('select[name="universe"] option:selected').val();
+				$.ajax({
+					type: "POST",
+					url: url,
+					data: $("#form-booking").serialize(), // serializes the form's elements.
+					success: function(data)
+					{
+						console.log(data); // show response from the php script.
+						if (data==='success'){
+							$('.universeName').html("").append('welcome to the universe of '+value);
+							$('#Modalsuccess').modal();
+						} else {
+							$('#Modalfailure').modal();
+						}
+					}
+				});
+					e.preventDefault;
+					return false;
+				});
+			</script>
 <!-- js for time-picker -->
 <script type="text/javascript" src="js/wickedpicker.js"></script>
 <script type="text/javascript">

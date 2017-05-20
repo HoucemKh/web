@@ -16,8 +16,8 @@ if (!$con)
 
  mysql_select_db("webcup", $con);
 
-$sql="INSERT INTO booking (`checkin`, `checkout`,`checkintime`, `checkouttime`, npeople, nuniverse)
-VALUES ('$dateCheckIn','$dateCheckOut','$timeCheckOut1','$timeCheckOut2','$_POST[people]','$_POST[universe]')";
+$sql="INSERT INTO booking (`checkin`, `checkout`,`checkintime`, `checkouttime`, npeople, nuniverse,`npackage`)
+VALUES ('$dateCheckIn','$dateCheckOut','$timeCheckOut1','$timeCheckOut2','$_POST[people]','$_POST[universe]','$_POST[package]')";
 
 $res = mysql_query($sql);
 
@@ -25,11 +25,12 @@ if (!mysql_query($sql,$con))
 
   {
 
-  die('Error: ' . mysql_error());
-
+  echo  'Error: ' . mysql_error();
+	 
+  } else {
+		echo "success";
   }
 
-echo "1 record added";
 
 mysql_close($con);
 
